@@ -69,4 +69,26 @@
             set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
             endif()
 
-- 
+# cmake构建步骤 
+
+
+1.创建构建目录	mkdir build && cd build	使用 Out-of-source 方式，保持源码目录整洁  
+
+2	生成构建文件	cmake ..	读取 CMakeLists.txt，生成 Makefile / Ninja / .sln 等
+
+3	编译和构建	cmake --build .	执行实际的编译和链接过程
+
+4	清理构建文件	cmake --build . --target clean	删除编译产生的中间文件和目标文件
+
+5	重新配置和构建	cmake .. && cmake --build .	CMakeLists.txt 变更后重新生成并编译
+
+大多数情况下，修改 CMakeLists.txt 后直接运行 cmake --build . 即可。构建系统会自动检测到 CMakeLists.txt 的变更并重新运行 cmake 配置步骤。
+
+# 注意事项
+始终使用 Out-of-source 构建。在源码目录中运行 cmake 会生成大量中间文件，污染版本控制。将 build 目录添加到 .gitignore 中是最佳实践。
+
+优先使用 cmake --build . 命令。这个命令是跨平台的通用构建入口，无论底层是 Make、Ninja 还是 MSBuild 都能正确工作。在脚本和 CI 环境中尤其推荐使用。
+
+构建类型影响性能和调试体验。Debug 模式包含调试符号且不优化，适合开发；Release 模式启用优化且去除调试信息，适合生产部署。不要用 Debug 模式测试性能，也不要用 Release 模式调试代码。
+
+遇到奇怪的构建错误时，删除 build 目录重来。CMake 的缓存有时会保留过期的配置信息，导致难以排查的错误。删除整个 build 目录并重新 cmake 是最快的排查方式。
