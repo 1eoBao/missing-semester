@@ -47,3 +47,40 @@ HEAD is now at e475afc add distributed
 ```
 - hard参数有啥意义？--hard会回退到上个版本的已提交状态，而--soft会回退到上个版本的未提交状态，--mixed会回退到上个版本已添加但未提交的状态
 - git checkout -- file可以丢弃工作区的修改,--很重要，没有--，就变成了“切换到另一个分支”的命令
+# git 状态查看
+- git log命令显示从最近到最远的提交日志，看得眼花缭乱的，可以试试加上--pretty=oneline参数
+
+
+- git status
+
+# 版本提交
+- 第一步，用命令git add告诉Git，把文件添加到仓库
+- 第二步，用命令git commit -m告诉Git，把文件提交到仓库
+- -m后面输入的是本次提交的说明，可以输入任意内容
+
+# 版本回退
+- 把当前版本append GPL回退到上一个版本add distributed，就可以使用git reset命令：
+
+``` 
+$ git reset --hard HEAD^  
+HEAD is now at e475afc add distributed 
+```
+- hard参数有啥意义？--hard会回退到上个版本的已提交状态，而--soft会回退到上个版本的未提交状态，--mixed会回退到上个版本已添加但未提交的状态
+- git checkout -- file可以丢弃工作区的修改,--很重要，没有--，就变成了“切换到另一个分支”的命令
+
+# PR（Pull Request，拉取请求） 的作用。
+
+一句话总结：PR 就是你向项目所有者（老师/原仓库）提交代码修改的“申请信”。
+
+在你的作业场景中，PR 的作用主要体现在以下几个方面：
+
+1. 核心作用：请求合并（交作业）
+你不能直接修改老师的仓库（OceanCing/missing-semester）。你只能在自己的仓库（Fork 出来的）里完成作业。
+PR 就是告诉老师：“我在我的仓库里写完了作业，请求你把我写的这部分内容，合并到你的主仓库里。” 这是你最终“交作业”的正式动作。
+
+
+# ssh命令
+- git remote set-url origin git@github.com:1eoBao/missing-semester.git    
+
+# push
+- git push -u origin master 
